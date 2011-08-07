@@ -1,0 +1,90 @@
+<!html>
+
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>z-index</title>
+
+    <style type="text/css" media="screen">
+      /* make div 2 inline with div 1 */
+      .div2 {
+        display: inline-block;
+      }
+
+      /* make them big enough and position them so that they "overlap" */
+
+      .div2 {
+        height: 70px;
+      }
+
+      .div1,
+      .div3 {
+        height: 100px;
+        width: 100px;
+      }
+
+      .div3 {
+        position: relative;
+        top: -50px;
+        left: 50px;
+      }
+
+      /* guidelines - make it obvious what is going on */
+      .div1 {
+        background-color: red;
+      }
+
+      .div3 {
+        background-color: blue;
+      }
+
+      .div2 {
+        background-color: green;
+      }
+
+      .div1,
+      .div2,
+      .div3 {
+        border: 1px solid;
+      }
+
+      /* the important stuff */
+      /* make sure z-index works on all of the elements */
+      .div1,
+      .div2,
+      .div3,
+      .wrapper {
+        position: relative;
+      }
+
+      .div2 {
+        z-index: 80;
+      }
+
+      .div1 {
+        z-index: auto;
+      }
+
+      .div3 {
+        z-index: 20;
+      }
+
+      /* toggling z-index for div1 - from 0 to not set (auto) changes the z-index of div2 */
+
+    </style>
+  </head>
+
+  <body>
+    <div class="div1">
+      Div 1
+
+      <div class="div2">
+        Div 2
+      </div>
+    </div>
+
+    <div class="div3">
+      Div 3
+    </div>
+  </body>
+</html>
