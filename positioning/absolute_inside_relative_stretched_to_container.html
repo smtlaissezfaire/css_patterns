@@ -1,0 +1,41 @@
+<!html>
+
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>z-index</title>
+
+    <style type="text/css" media="screen">
+      .container {
+        height: 600px;
+
+        position: relative;
+      }
+
+      .content {
+        position: absolute;
+        bottom: 0;
+        top: 0;
+        left: 20px;
+      }
+
+      /* guidelines */
+      .container {
+        background-color: green;
+      }
+
+      .content {
+        background-color: red;
+        width: 100px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="content">
+        foo bar baz
+      </div>
+    </div>
+  </body>
+</html>
