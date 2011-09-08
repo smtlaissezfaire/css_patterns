@@ -1,0 +1,62 @@
+<!html>
+
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>z-index</title>
+
+    <style type="text/css" media="screen">
+      .top,
+      .left,
+      .right,
+      .bottom {
+        border: 1px solid black;
+      }
+
+      .top {
+        margin-bottom: 200px;
+      }
+
+      .bottom {
+        margin-top: 100px;
+      }
+
+      .left,
+      .right {
+        width: 100px;
+        height: 100px;
+        display: inline-block;
+      }
+
+      .left {
+        background-color: red;
+        margin-right: 200px;
+      }
+
+      .right {
+        background-color: black;
+        margin-left: 100px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Top and bottom collapse to the larger value:</h1>
+
+    <div class="top">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </div>
+
+    <div class="bottom">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </div>
+
+    <h1>left + right don't collapse</h1>
+
+    <div class="left">
+    </div>
+
+    <div class="right">
+    </div>
+  </body>
+</html>
