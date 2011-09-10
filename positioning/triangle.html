@@ -1,0 +1,173 @@
+<!html>
+
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>z-index</title>
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+
+    <style type="text/css" media="screen">
+      /* guidelines */
+        /* pointing right */
+/*        border-color: transparent transparent transparent yellow;
+        border-width: 30px 0 30px 30px;
+*/
+        /* pointing left green */
+/*        border-color: red green blue yellow;
+        border-width: 30px 30px 30px 0;
+*/
+        /* top - pointing down */
+/*        border-color: red green blue yellow;
+        border-width: 30px 30px 0 30px;
+*/
+        /* bottom - pointing to the top */
+/*        border-color: red green blue yellow;
+        border-width: 0 30px 30px 30px;
+*/
+
+    </style>
+  </head>
+
+  <body>
+    before
+    <div class="foo"></div>
+    after
+
+    before
+    <div class="bordered"></div>
+    after
+
+    <script type="text/javascript" charset="utf-8">
+      if (typeof erly === 'undefined') {
+        var erly = {};
+      }
+
+      if (typeof erly.widgets === 'undefined') {
+        erly.widgets = {}
+      }
+
+      // takes same options as erly.widgets.triangle,
+      // but also takes an additional borderColor
+      erly.widgets.borderedTriangle = function(el, options) {
+        var wrapper = $("<div class='bordered-triangle'></div>");
+
+        var borderColor = options.borderColor;
+        delete borderColor;
+
+        var foregroundOptions = options;
+        var backgroundOptions = $.extend({}, options);
+        backgroundOptions = $.extend(backgroundOptions, {color: borderColor});
+
+        var background = erly.widgets.triangle(wrapper, backgroundOptions);
+        var foreground = erly.widgets.triangle(background, foregroundOptions);
+
+        console.log(options.pointingTo);
+
+        var negativeBorderWidth = options.borderWidth * -1;
+
+        switch(options.position) {
+          case RIGHT:
+            foreground.css("margin-left", negativeBorderWidth - 1);
+            foreground.css("margin-top", negativeBorderWidth);
+            break;
+          case LEFT:
+            foreground.css("margin-left", 1);
+            foreground.css("margin-top", negativeBorderWidth);
+            break;
+          case TOP:
+            foreground.css("margin-left", negativeBorderWidth);
+            foreground.css("padding-top", 1);
+            break;
+          case BOTTOM:
+            foreground.css("margin-left", negativeBorderWidth);
+            foreground.css("margin-top", negativeBorderWidth - 1);
+            break;
+        }
+
+        wrapper.appendTo(el);
+        return el;
+      };
+
+      // options:
+      //
+      //   pointingTo: right | left | top | bottom
+      //   borderWidth
+      //   color
+      //
+      //
+      var RIGHT = "right",
+          LEFT = "left",
+          BOTTOM = "bottom",
+          TOP = "top",
+          POSITIONS = [
+            TOP,
+            RIGHT,
+            BOTTOM,
+            LEFT
+          ];
+
+      var oppositePosition = function(pos) {
+        switch (pos) {
+          case RIGHT:
+            return LEFT;
+          case LEFT:
+            return RIGHT;
+          case BOTTOM:
+            return TOP;
+          case TOP:
+            return BOTTOM;
+        }
+      };
+
+      var makeBorderName = function(positionName, attr) {
+        return "border-" + positionName + "-" + attr;
+      };
+
+      erly.widgets.triangle = function(el, options) {
+        el = $(el);
+        var givenPosition = options.position;
+        var triangle = $("<div class='triangle " + givenPosition + "'></div>");
+        triangle.appendTo(el);
+
+        $.each(POSITIONS, function(i, pos) {
+          var width = makeBorderName(pos, "width");
+          var color = makeBorderName(pos, "color");
+
+          if (pos === givenPosition) {
+            triangle.css(width, 0);
+          } else {
+            console.log("setting " + width + " to " + options.borderWidth);
+            triangle.css(width, options.borderWidth);
+          }
+        });
+
+        triangle.css("border-color", "transparent");
+
+        // set the color to the opposite pos that it is pointing to
+        triangle.css(makeBorderName(oppositePosition(givenPosition), "color"), options.color);
+
+        triangle.css("border-style", "solid");
+        triangle.css('width', 0);
+        triangle.css('height', 0);
+
+        return triangle;
+      };
+
+      erly.widgets.triangle(".foo", {
+        borderWidth: 20,
+        position: 'right',
+        color: 'purple'
+      });
+
+      erly.widgets.borderedTriangle(".bordered", {
+        borderWidth: 20,
+        position: 'bottom',
+        color: 'green',
+        borderColor: '#ccc'
+      })
+    </script>
+  </body>
+</html>
+
+
